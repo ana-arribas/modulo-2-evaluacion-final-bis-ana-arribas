@@ -47,6 +47,12 @@ const displayShows = patata => {
     }
 };
 
+const hidePreviousResults = () => {
+    if (list.innerHTML !== null) {
+        list.innerHTML = '';
+    }
+};
+
 let objectNumberGames = {
     selected: ''
 };
@@ -59,14 +65,40 @@ function storeGame() {
     } else if (input8.checked) {
         objectNumberGames.selected = input8.value;
     }
-    storeData();
-}
-
-function storeData() {
     localStorage.setItem('Details', JSON.stringify(objectNumberGames));
 };
 
+function checkLocalStorage() {
+    if (localStorage.getItem('Details') !== null) {
+        getGame();
+    }
+}
+
+function getGame() {
+    const storedGame = JSON.parse(localStorage.getItem('Details'));
+    if (storedGame !== undefined) {
+        if (storedGame.selected === input4.value) {
+            input4.checked = true;
+            input6.checked = false;
+            input8.checked = false
+        } else if (storedGame.selected === input6.value) {
+            input6.checked = true;
+            input8.checked = false;
+            input4.checked = false
+        } else if (storedGame.selected === input8.value) {
+            input6.checked = false;
+            input4.checked = false;
+            input8.checked = true;
+        }
+    }
+};
+
+
+
 button.addEventListener('click', connectHandler);
+button.addEventListener('click', hidePreviousResults);
 input4.addEventListener('click', storeGame);
 input6.addEventListener('click', storeGame);
 input8.addEventListener('click', storeGame);
+window.addEventListener('load', checkLocalStorage);
+window.addEventListener('load', connectHandler);
