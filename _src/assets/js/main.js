@@ -34,13 +34,39 @@ const connectHandler = () => {
 const displayShows = patata => {
     for (let card of patata) {
         const elementImg = document.createElement('img');
-        elementImg.src = card.image;
         const elementCard = document.createElement('div');
+        const elementSpan = document.createElement('span');
+        elementSpan.innerHTML = 'ADALAB';
+        elementImg.src = card.image;
         elementCard.classList.add('card');
+        list.classList.add('list');
+        elementImg.classList.add('hidden');
         list.appendChild(elementCard);
         elementCard.appendChild(elementImg);
-        elementImg.classList.add('hidden');
+        elementCard.appendChild(elementSpan);
     }
+};
+
+let objectNumberGames = {
+    selected: ''
+};
+
+function storeGame() {
+    if (input4.checked) {
+        objectNumberGames.selected = input4.value;
+    } else if (input6.checked) {
+        objectNumberGames.selected = input6.value;
+    } else if (input8.checked) {
+        objectNumberGames.selected = input8.value;
+    }
+    storeData();
 }
 
+function storeData() {
+    localStorage.setItem('Details', JSON.stringify(objectNumberGames));
+};
+
 button.addEventListener('click', connectHandler);
+input4.addEventListener('click', storeGame);
+input6.addEventListener('click', storeGame);
+input8.addEventListener('click', storeGame);
