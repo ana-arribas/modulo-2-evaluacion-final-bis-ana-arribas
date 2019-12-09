@@ -19,15 +19,10 @@ const connectHandler = () => {
             .then(response => response.json())
             .then(data => displayShows(data))
     }
-    else if (input8.checked) {
+    else {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input8.value}.json`)
             .then(response => response.json())
             .then(data => displayShows(data))
-    }
-    else {
-        const alert = document.createElement('p');
-        alert.innerHTML = 'Por favor, selecciona una opción'
-        wrapper.appendChild(alert);
     }
 };
 
@@ -62,7 +57,7 @@ function storeGame() {
         objectNumberGames.selected = input4.value;
     } else if (input6.checked) {
         objectNumberGames.selected = input6.value;
-    } else if (input8.checked) {
+    } else {
         objectNumberGames.selected = input8.value;
     }
     localStorage.setItem('Details', JSON.stringify(objectNumberGames));
@@ -72,7 +67,7 @@ function checkLocalStorage() {
     if (localStorage.getItem('Details') !== null) {
         getGame();
     }
-}
+};
 
 function getGame() {
     const storedGame = JSON.parse(localStorage.getItem('Details'));
@@ -81,11 +76,13 @@ function getGame() {
             input4.checked = true;
             input6.checked = false;
             input8.checked = false
-        } else if (storedGame.selected === input6.value) {
+        }
+        else if (storedGame.selected === input6.value) {
             input6.checked = true;
             input8.checked = false;
             input4.checked = false
-        } else if (storedGame.selected === input8.value) {
+        }
+        else {
             input6.checked = false;
             input4.checked = false;
             input8.checked = true;
@@ -93,12 +90,8 @@ function getGame() {
     }
 };
 
-
-
 button.addEventListener('click', connectHandler);
 button.addEventListener('click', hidePreviousResults);
-input4.addEventListener('click', storeGame);
-input6.addEventListener('click', storeGame);
-input8.addEventListener('click', storeGame);
+button.addEventListener('click', storeGame);
 window.addEventListener('load', checkLocalStorage);
 window.addEventListener('load', connectHandler);
