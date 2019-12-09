@@ -5,7 +5,6 @@ const input4 = document.querySelector('#radio4');
 const input6 = document.querySelector('#radio6');
 const input8 = document.querySelector('#radio8');
 const wrapper = document.querySelector('.main-wrapper');
-const allinputs = document.querySelectorAll('.input');
 const list = document.querySelector('#list');
 
 const connectHandler = () => {
@@ -33,12 +32,16 @@ const displayShows = patata => {
         const elementSpan = document.createElement('span');
         elementSpan.innerHTML = 'ADALAB';
         elementImg.src = card.image;
+        elementImg.classList.add('select-img');
+        elementSpan.classList.add('select-span');
+        elementCard.classList.add('select-card');
         elementCard.classList.add('card');
         list.classList.add('list');
         elementImg.classList.add('hidden');
         list.appendChild(elementCard);
         elementCard.appendChild(elementImg);
         elementCard.appendChild(elementSpan);
+        elementCard.addEventListener('click', turnCards);
     }
 };
 
@@ -89,6 +92,13 @@ function getGame() {
         }
     }
 };
+
+function turnCards(event) {
+    event.currentTarget.classList.add('card-reverse');
+    event.currentTarget.firstChild.classList.remove('hidden');
+    event.currentTarget.lastChild.classList.add('hidden');
+};
+
 
 button.addEventListener('click', connectHandler);
 button.addEventListener('click', hidePreviousResults);
