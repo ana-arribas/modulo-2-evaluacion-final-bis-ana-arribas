@@ -38,6 +38,8 @@ const displayShows = patata => {
         const elementImg = document.createElement('img');
         const elementCard = document.createElement('div');
         const elementSpan = document.createElement('span');
+
+        elementCard.setAttribute('pair', card.pair);
         elementSpan.innerHTML = 'ADALAB';
         elementImg.src = card.image;
         elementImg.classList.add('select-img');
@@ -102,11 +104,34 @@ function getGame() {
 };
 
 function turnCards(event) {
-    const cardSelected = event.currentTarget.classList.add('card-reverse');
+    // let unasolo;
+    const descubiertas = document.querySelectorAll('.card-reverse');
+    if (descubiertas.length > 1) {
+        return;
+    }
+    event.currentTarget.classList.add('card-reverse');
     event.currentTarget.firstChild.classList.remove('hidden');
     event.currentTarget.lastChild.classList.add('hidden');
-
-
+    const unasolo = document.querySelectorAll('.card-reverse');
+    if (unasolo.length < 2) {
+        return;
+    }
+    // console.log(unasolo[0].textContent);
+    // console.log(unasolo[1].textContent);
+    // // for (let una of unasolo)
+    if (unasolo[0].attributes[0].value !== unasolo[1].attributes[0].value) {
+        for (let each of unasolo) {
+            each.classList.remove('card-reverse');
+            each.firstChild.classList.add('hidden');
+            each.lastChild.classList.remove('hidden');
+        }
+        console.log('error');
+    } else {
+        for (let each of unasolo) {
+            each.classList.add('pareja');
+        }
+        console.log('acierto');
+    }
 };
 
 
