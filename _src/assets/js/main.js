@@ -11,22 +11,30 @@ const connectHandler = () => {
     if (input4.checked) {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input4.value}.json`)
             .then(response => response.json())
-            .then(data => displayShows(data))
+            .then(data => barajar(data))
     }
     else if (input6.checked) {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input6.value}.json`)
             .then(response => response.json())
-            .then(data => displayShows(data))
+            .then(data => barajar(data))
     }
     else {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input8.value}.json`)
             .then(response => response.json())
-            .then(data => displayShows(data))
+            .then(data => barajar(data))
     }
 };
 
+function barajar(patata) {
+    const result = patata.sort(function () {
+        return 0.5 - Math.random();
+    });
+    displayShows(result);
+}
+
 const displayShows = patata => {
     for (let card of patata) {
+        console.log(card);
         const elementImg = document.createElement('img');
         const elementCard = document.createElement('div');
         const elementSpan = document.createElement('span');
@@ -63,17 +71,17 @@ function storeGame() {
     } else {
         objectNumberGames.selected = input8.value;
     }
-    localStorage.setItem('Details', JSON.stringify(objectNumberGames));
+    localStorage.setItem('Storing', JSON.stringify(objectNumberGames));
 };
 
-function checkLocalStorage() {
-    if (localStorage.getItem('Details') !== null) {
+function check() {
+    if (localStorage.getItem('Storing') !== null) {
         getGame();
     }
 };
 
 function getGame() {
-    const storedGame = JSON.parse(localStorage.getItem('Details'));
+    const storedGame = JSON.parse(localStorage.getItem('Storing'));
     if (storedGame !== undefined) {
         if (storedGame.selected === input4.value) {
             input4.checked = true;
@@ -94,14 +102,20 @@ function getGame() {
 };
 
 function turnCards(event) {
-    event.currentTarget.classList.add('card-reverse');
+    const cardSelected = event.currentTarget.classList.add('card-reverse');
     event.currentTarget.firstChild.classList.remove('hidden');
     event.currentTarget.lastChild.classList.add('hidden');
+
+
 };
+
+
+
+
 
 
 button.addEventListener('click', connectHandler);
 button.addEventListener('click', hidePreviousResults);
 button.addEventListener('click', storeGame);
-window.addEventListener('load', checkLocalStorage);
+window.addEventListener('load', check);
 window.addEventListener('load', connectHandler);
