@@ -25,12 +25,12 @@ const connectHandler = () => {
     }
 };
 
-function mixCards(myArray) {
+const mixCards = myArray => {
     const result = myArray.sort(function () {
         return 0.5 - Math.random();
     });
     displayShows(result);
-}
+};
 
 const displayShows = arrayMixed => {
     for (let card of arrayMixed) {
@@ -65,7 +65,7 @@ let objectNumberGames = {
     selected: ''
 };
 
-function storeGame() {
+const storeGame = () => {
     if (input4.checked) {
         objectNumberGames.selected = input4.value;
     } else if (input6.checked) {
@@ -76,13 +76,13 @@ function storeGame() {
     localStorage.setItem('Storing', JSON.stringify(objectNumberGames));
 };
 
-function check() {
+const check = () => {
     if (localStorage.getItem('Storing') !== null) {
         getGame();
     }
 };
 
-function getGame() {
+const getGame = () => {
     const storedGame = JSON.parse(localStorage.getItem('Storing'));
     if (storedGame !== undefined) {
         if (storedGame.selected === input4.value) {
@@ -103,7 +103,7 @@ function getGame() {
     }
 };
 
-function turnCards(event) {
+const turnCards = event => {
     // let unasolo;
     const totalTurned = document.querySelectorAll('.card-reverse');
     // :not(.match)
@@ -126,22 +126,22 @@ function turnCards(event) {
         correctMatch(eachTurned);
     }
 };
-function errorMatch(arrayOfTurned) {
+
+const errorMatch = arrayOfTurned => {
     for (let each of arrayOfTurned) {
         each.classList.remove('card-reverse');
         each.firstChild.classList.add('hidden');
         each.lastChild.classList.remove('hidden');
     }
     console.log('error');
-}
+};
 
-function correctMatch(arrayOfTurned) {
+const correctMatch = arrayOfTurned => {
     for (let each of arrayOfTurned) {
         each.classList.add('match');
     }
     console.log('acierto');
-}
-
+};
 
 button.addEventListener('click', connectHandler);
 button.addEventListener('click', hidePreviousResults);
