@@ -4,36 +4,36 @@ const button = document.querySelector('#button');
 const input4 = document.querySelector('#radio4');
 const input6 = document.querySelector('#radio6');
 const input8 = document.querySelector('#radio8');
-const wrapper = document.querySelector('.main-wrapper');
+// const wrapper = document.querySelector('.main-wrapper');
 const list = document.querySelector('#list');
 
 const connectHandler = () => {
     if (input4.checked) {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input4.value}.json`)
             .then(response => response.json())
-            .then(data => barajar(data))
+            .then(data => mixCards(data))
     }
     else if (input6.checked) {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input6.value}.json`)
             .then(response => response.json())
-            .then(data => barajar(data))
+            .then(data => mixCards(data))
     }
     else {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input8.value}.json`)
             .then(response => response.json())
-            .then(data => barajar(data))
+            .then(data => mixCards(data))
     }
 };
 
-function barajar(patata) {
-    const result = patata.sort(function () {
+function mixCards(myArray) {
+    const result = myArray.sort(function () {
         return 0.5 - Math.random();
     });
     displayShows(result);
 }
 
-const displayShows = patata => {
-    for (let card of patata) {
+const displayShows = arrayMixed => {
+    for (let card of arrayMixed) {
         console.log(card);
         const elementImg = document.createElement('img');
         const elementCard = document.createElement('div');
@@ -105,38 +105,42 @@ function getGame() {
 
 function turnCards(event) {
     // let unasolo;
-    const descubiertas = document.querySelectorAll('.card-reverse');
-    if (descubiertas.length > 1) {
+    const totalTurned = document.querySelectorAll('.card-reverse');
+    // :not(.match)
+    if (totalTurned.length > 1) {
         return;
     }
     event.currentTarget.classList.add('card-reverse');
     event.currentTarget.firstChild.classList.remove('hidden');
     event.currentTarget.lastChild.classList.add('hidden');
-    const unasolo = document.querySelectorAll('.card-reverse');
-    if (unasolo.length < 2) {
+    const eachTurned = document.querySelectorAll('.card-reverse');
+    if (eachTurned.length < 2) {
         return;
     }
     // console.log(unasolo[0].textContent);
     // console.log(unasolo[1].textContent);
     // // for (let una of unasolo)
-    if (unasolo[0].attributes[0].value !== unasolo[1].attributes[0].value) {
-        for (let each of unasolo) {
-            each.classList.remove('card-reverse');
-            each.firstChild.classList.add('hidden');
-            each.lastChild.classList.remove('hidden');
-        }
-        console.log('error');
+    if (eachTurned[0].attributes[0].value !== eachTurned[1].attributes[0].value) {
+        errorMatch(eachTurned);
     } else {
-        for (let each of unasolo) {
-            each.classList.add('pareja');
-        }
-        console.log('acierto');
+        correctMatch(eachTurned);
     }
 };
+function errorMatch(arrayOfTurned) {
+    for (let each of arrayOfTurned) {
+        each.classList.remove('card-reverse');
+        each.firstChild.classList.add('hidden');
+        each.lastChild.classList.remove('hidden');
+    }
+    console.log('error');
+}
 
-
-
-
+function correctMatch(arrayOfTurned) {
+    for (let each of arrayOfTurned) {
+        each.classList.add('match');
+    }
+    console.log('acierto');
+}
 
 
 button.addEventListener('click', connectHandler);
