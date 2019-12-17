@@ -105,7 +105,7 @@ const getGame = () => {
 
 const turnCards = event => {
     // let unasolo;
-    const totalTurned = document.querySelectorAll('.card-reverse');
+    const totalTurned = document.querySelectorAll('.card-reverse:not(.match)');
     // :not(.match)
     if (totalTurned.length > 1) {
         return;
@@ -113,7 +113,7 @@ const turnCards = event => {
     event.currentTarget.classList.add('card-reverse');
     event.currentTarget.firstChild.classList.remove('hidden');
     event.currentTarget.lastChild.classList.add('hidden');
-    const eachTurned = document.querySelectorAll('.card-reverse');
+    const eachTurned = document.querySelectorAll('.card-reverse:not(.match)');
     if (eachTurned.length < 2) {
         return;
     }
