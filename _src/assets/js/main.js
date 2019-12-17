@@ -4,7 +4,6 @@ const button = document.querySelector('#button');
 const input4 = document.querySelector('#radio4');
 const input6 = document.querySelector('#radio6');
 const input8 = document.querySelector('#radio8');
-// const wrapper = document.querySelector('.main-wrapper');
 const list = document.querySelector('#list');
 
 const connectHandler = () => {
@@ -104,9 +103,7 @@ const getGame = () => {
 };
 
 const turnCards = event => {
-    // let unasolo;
     const totalTurned = document.querySelectorAll('.card-reverse:not(.match)');
-    // :not(.match)
     if (totalTurned.length > 1) {
         return;
     }
@@ -117,17 +114,12 @@ const turnCards = event => {
     if (eachTurned.length < 2) {
         return;
     }
-    // console.log(unasolo[0].textContent);
-    // console.log(unasolo[1].textContent);
-    // // for (let una of unasolo)
     if (eachTurned[0].attributes[0].value !== eachTurned[1].attributes[0].value) {
         setTimeout(function () { errorMatch(eachTurned); }, 1000);
     } else {
         correctMatch(eachTurned);
     }
 };
-
-
 
 const errorMatch = arrayOfTurned => {
     for (let each of arrayOfTurned) {

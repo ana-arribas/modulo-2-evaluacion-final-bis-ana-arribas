@@ -1,20 +1,15 @@
 .hidden {
     display: none;
 }
-
 .list-wrapper {
-
     width: 100%;
-   
 }
-
 .list {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-evenly;
 }
-
 .card {
     background-color: cyan;
     height: 190px;
@@ -29,7 +24,7 @@
     text-align: center;
 }
 .card-reverse {
-    background-color: white;
+    background-color: whitesmoke;
     height: 190px;
     width: 125px;
     margin: 10px;
@@ -41,5 +36,5 @@
     text-align: center;
 }
 .match {
-    background-color:rgb(134, 247, 134);
+    background-color: black;
 }
