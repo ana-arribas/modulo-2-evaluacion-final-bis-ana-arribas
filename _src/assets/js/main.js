@@ -121,11 +121,13 @@ const turnCards = event => {
     // console.log(unasolo[1].textContent);
     // // for (let una of unasolo)
     if (eachTurned[0].attributes[0].value !== eachTurned[1].attributes[0].value) {
-        errorMatch(eachTurned);
+        setTimeout(function () { errorMatch(eachTurned); }, 1000);
     } else {
         correctMatch(eachTurned);
     }
 };
+
+
 
 const errorMatch = arrayOfTurned => {
     for (let each of arrayOfTurned) {
