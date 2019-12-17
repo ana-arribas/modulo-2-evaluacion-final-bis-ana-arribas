@@ -60,11 +60,10 @@ const hidePreviousResults = () => {
     }
 };
 
-let objectNumberGames = {
-    selected: ''
-};
-
-const storeGame = () => {
+const setGame = () => {
+    const objectNumberGames = {
+        selected: ''
+    };
     if (input4.checked) {
         objectNumberGames.selected = input4.value;
     } else if (input6.checked) {
@@ -86,17 +85,11 @@ const getGame = () => {
     if (storedGame !== undefined) {
         if (storedGame.selected === input4.value) {
             input4.checked = true;
-            input6.checked = false;
-            input8.checked = false
         }
         else if (storedGame.selected === input6.value) {
             input6.checked = true;
-            input8.checked = false;
-            input4.checked = false
         }
         else {
-            input6.checked = false;
-            input4.checked = false;
             input8.checked = true;
         }
     }
@@ -139,6 +132,6 @@ const correctMatch = arrayOfTurned => {
 
 button.addEventListener('click', connectHandler);
 button.addEventListener('click', hidePreviousResults);
-button.addEventListener('click', storeGame);
+button.addEventListener('click', setGame);
 window.addEventListener('load', check);
 window.addEventListener('load', connectHandler);
