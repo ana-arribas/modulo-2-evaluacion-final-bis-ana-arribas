@@ -11,14 +11,19 @@
     
     <body>
         <div class="main-wrapper">
-            <form action="" method="POST">
+             <h1 class="title">Encuentra las parejas</h1>
+
+            <form class="form" action="" method="POST">
+                 <h5 class="title">¿Con cuántas cartas quieres jugar?</h5>
+
                 <input id="radio4" type="radio" name="numberofcards" value="4" checked>4
                 <input id="radio6" type="radio" name="numberofcards" value="6">6
                 <input id="radio8" type="radio" name="numberofcards" value="8">8
-                <input id="button" type="button" value="Comenzar">
+                <input class="button" id="button" type="button" value="Comenzar">
             </form>
             <div class="list-wrapper">
                 <div id="list"></div>
+                <div class="list2" id="list2"></div>
             </div>
         </div>
         <script src="./assets/js/main.js"></script>
