@@ -5,22 +5,33 @@ const input4 = document.querySelector('#radio4');
 const input6 = document.querySelector('#radio6');
 const input8 = document.querySelector('#radio8');
 const list = document.querySelector('#list');
+const list2 = document.querySelector('#list2');
+let arrayvacio;
 
 const connectHandler = () => {
     if (input4.checked) {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input4.value}.json`)
             .then(response => response.json())
-            .then(data => mixCards(data))
+            .then(data => {
+                mixCards(data)
+                arrayvacio = data
+            })
     }
     else if (input6.checked) {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input6.value}.json`)
             .then(response => response.json())
-            .then(data => mixCards(data))
+            .then(data => {
+                mixCards(data)
+                arrayvacio = data
+            })
     }
     else {
         fetch(`https://beta.adalab.es/ejercicios-extra/api/pokemon-cards/${input8.value}.json`)
             .then(response => response.json())
-            .then(data => mixCards(data))
+            .then(data => {
+                mixCards(data)
+                arrayvacio = data
+            })
     }
 };
 
@@ -33,11 +44,9 @@ const mixCards = myArray => {
 
 const displayShows = arrayMixed => {
     for (let card of arrayMixed) {
-        console.log(card);
         const elementImg = document.createElement('img');
         const elementCard = document.createElement('div');
         const elementSpan = document.createElement('span');
-
         elementCard.setAttribute('pair', card.pair);
         elementSpan.innerHTML = 'ADALAB';
         elementImg.src = card.image;
